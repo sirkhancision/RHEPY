@@ -176,6 +176,33 @@ def print_instructions(language):
             print("")
 
 
+def print_result_explanation(language):
+    """
+    Prints an explanation about how the results are calculated
+    """
+    match language:
+        case consts.ENGLISH:
+            print(
+                "\n".join(
+                    wrap(
+                        "The results of RHEPY are calculated, first, by the highest scored type in the test. Then, if two types are tied, the one with the highest scored wings takes precedence. Lastly, it checks if your overall score matches a set of conditions that correlate to one specific type, and if it does, that ends up being your resulting type. So, even if your resulting type is not the highest scored type in the test, that's not a mistake!",
+                        80,
+                    )
+                )
+            )
+            print("")
+        case consts.PORTUGUESE:
+            print(
+                "\n".join(
+                    wrap(
+                        "Os resultados do RHEPY são calculados, primeiro, pelo tipo com a maior pontuação no teste. Então, se dois tipos estiverem empatados, o tipo com as asas de maior pontuação toma prioridade. Por último, ele checa se sua pontuação geral corresponde a uma série de condições correlacionadas a um tipo específico, e se sim, este fica sendo o seu tipo resultante. Portanto, mesmo que o seu tipo resultante não seja o de maior pontuação no teste, isso não é um erro!",
+                        80,
+                    )
+                )
+            )
+            print("")
+
+
 def print_result(language, types):
     """
     Prints the results to the test, with scores

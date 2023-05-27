@@ -54,10 +54,11 @@ def language_choice():
     return language
 
 
-def instructions_or_test_choice(language):
+def test_choice(language):
     """
     Prints translated prompt for selecting if the user wants to read the
-    instructions or go directly to the test
+    instructions, go directly to the test, or read how the results of the
+    test are calculated
     """
     match language:
         case consts.ENGLISH:
@@ -69,7 +70,11 @@ def instructions_or_test_choice(language):
                 + Fore.RED
                 + "[2] "
                 + Fore.GREEN
-                + "The RHEPY test"
+                + "The RHEPY test\n"
+                + Fore.RED
+                + "[3] "
+                + Fore.GREEN
+                + "Explain how the results are calculated"
                 + Fore.RESET
             )
             choice = input()
@@ -82,7 +87,11 @@ def instructions_or_test_choice(language):
                 + Fore.RED
                 + "[2] "
                 + Fore.GREEN
-                + "O teste RHEPY"
+                + "O teste RHEPY\n"
+                + Fore.RED
+                + "[3] "
+                + Fore.GREEN
+                + "Explicar como os resultados são calculados"
                 + Fore.RESET
             )
             choice = input()
@@ -112,10 +121,12 @@ def main():
     lang.print_post_greeting(language)
 
     while True:
-        choice = instructions_or_test_choice(language)
+        choice = test_choice(language)
         match choice:
             case consts.INSTRUCTIONS:
                 lang.print_instructions(language)
+            case consts.EXPLANATION:
+                lang.print_result_explanation(language)
             case consts.TEST:
                 break
 
