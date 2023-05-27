@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.11
+#!/usr/bin/env python3
 
 
 def result_type(types):
@@ -70,141 +70,139 @@ def result_type(types):
         types["result"] = second_highest
 
     # triads method
-    if (
-        groups_triads["intelligence"]["instinct"]
-        > groups_triads["intelligence"]["thinking"]
-        and groups_triads["intelligence"]["instinct"]
-        > groups_triads["intelligence"]["feeling"]
-        and groups_triads["hornevian"]["dutiful"]
-        > groups_triads["hornevian"]["assertive"]
-        and groups_triads["hornevian"]["dutiful"]
-        > groups_triads["hornevian"]["withdrawn"]
-        and groups_triads["harmonic"]["competency"]
-        > groups_triads["harmonic"]["reactive"]
-        and groups_triads["harmonic"]["competency"]
-        > groups_triads["harmonic"]["positive"]
-    ):
-        types["result"] = 1
-    elif (
-        groups_triads["intelligence"]["feeling"]
-        > groups_triads["intelligence"]["thinking"]
-        and groups_triads["intelligence"]["feeling"]
-        > groups_triads["intelligence"]["instinct"]
-        and groups_triads["hornevian"]["dutiful"]
-        > groups_triads["hornevian"]["assertive"]
-        and groups_triads["hornevian"]["dutiful"]
-        > groups_triads["hornevian"]["withdrawn"]
-        and groups_triads["harmonic"]["positive"]
-        > groups_triads["harmonic"]["reactive"]
-        and groups_triads["harmonic"]["positive"]
-        > groups_triads["harmonic"]["competency"]
-    ):
-        types["result"] = 2
-    elif (
-        groups_triads["intelligence"]["feeling"]
-        > groups_triads["intelligence"]["thinking"]
-        and groups_triads["intelligence"]["feeling"]
-        > groups_triads["intelligence"]["instinct"]
-        and groups_triads["hornevian"]["assertive"]
-        > groups_triads["hornevian"]["dutiful"]
-        and groups_triads["hornevian"]["assertive"]
-        > groups_triads["hornevian"]["withdrawn"]
-        and groups_triads["harmonic"]["competency"]
-        > groups_triads["harmonic"]["reactive"]
-        and groups_triads["harmonic"]["competency"]
-        > groups_triads["harmonic"]["positive"]
-    ):
-        types["result"] = 3
-    elif (
-        groups_triads["intelligence"]["feeling"]
-        > groups_triads["intelligence"]["thinking"]
-        and groups_triads["intelligence"]["feeling"]
-        > groups_triads["intelligence"]["instinct"]
-        and groups_triads["hornevian"]["withdrawn"]
-        > groups_triads["hornevian"]["dutiful"]
-        and groups_triads["hornevian"]["withdrawn"]
-        > groups_triads["hornevian"]["assertive"]
-        and groups_triads["harmonic"]["reactive"]
-        > groups_triads["harmonic"]["competency"]
-        and groups_triads["harmonic"]["reactive"]
-        > groups_triads["harmonic"]["positive"]
-    ):
-        types["result"] = 4
-    elif (
-        groups_triads["intelligence"]["thinking"]
-        > groups_triads["intelligence"]["feeling"]
-        and groups_triads["intelligence"]["thinking"]
-        > groups_triads["intelligence"]["instinct"]
-        and groups_triads["hornevian"]["withdrawn"]
-        > groups_triads["hornevian"]["dutiful"]
-        and groups_triads["hornevian"]["withdrawn"]
-        > groups_triads["hornevian"]["assertive"]
-        and groups_triads["harmonic"]["competency"]
-        > groups_triads["harmonic"]["reactive"]
-        and groups_triads["harmonic"]["competency"]
-        > groups_triads["harmonic"]["positive"]
-    ):
-        types["result"] = 5
-    elif (
-        groups_triads["intelligence"]["thinking"]
-        > groups_triads["intelligence"]["feeling"]
-        and groups_triads["intelligence"]["thinking"]
-        > groups_triads["intelligence"]["instinct"]
-        and groups_triads["hornevian"]["dutiful"]
-        > groups_triads["hornevian"]["withdrawn"]
-        and groups_triads["hornevian"]["dutiful"]
-        > groups_triads["hornevian"]["assertive"]
-        and groups_triads["harmonic"]["reactive"]
-        > groups_triads["harmonic"]["competency"]
-        and groups_triads["harmonic"]["reactive"]
-        > groups_triads["harmonic"]["positive"]
-    ):
-        types["result"] = 6
-    elif (
-        groups_triads["intelligence"]["thinking"]
-        > groups_triads["intelligence"]["feeling"]
-        and groups_triads["intelligence"]["thinking"]
-        > groups_triads["intelligence"]["instinct"]
-        and groups_triads["hornevian"]["assertive"]
-        > groups_triads["hornevian"]["withdrawn"]
-        and groups_triads["hornevian"]["assertive"]
-        > groups_triads["hornevian"]["dutiful"]
-        and groups_triads["harmonic"]["positive"]
-        > groups_triads["harmonic"]["competency"]
-        and groups_triads["harmonic"]["positive"]
-        > groups_triads["harmonic"]["reactive"]
-    ):
-        types["result"] = 7
-    elif (
-        groups_triads["intelligence"]["instinct"]
-        > groups_triads["intelligence"]["feeling"]
-        and groups_triads["intelligence"]["instinct"]
-        > groups_triads["intelligence"]["thinking"]
-        and groups_triads["hornevian"]["assertive"]
-        > groups_triads["hornevian"]["withdrawn"]
-        and groups_triads["hornevian"]["assertive"]
-        > groups_triads["hornevian"]["dutiful"]
-        and groups_triads["harmonic"]["reactive"]
-        > groups_triads["harmonic"]["competency"]
-        and groups_triads["harmonic"]["reactive"]
-        > groups_triads["harmonic"]["positive"]
-    ):
-        types["result"] = 8
-    elif (
-        groups_triads["intelligence"]["instinct"]
-        > groups_triads["intelligence"]["feeling"]
-        and groups_triads["intelligence"]["instinct"]
-        > groups_triads["intelligence"]["thinking"]
-        and groups_triads["hornevian"]["withdrawn"]
-        > groups_triads["hornevian"]["assertive"]
-        and groups_triads["hornevian"]["withdrawn"]
-        > groups_triads["hornevian"]["dutiful"]
-        and groups_triads["harmonic"]["positive"]
-        > groups_triads["harmonic"]["reactive"]
-        and groups_triads["harmonic"]["positive"]
-        > groups_triads["harmonic"]["positive"]
-    ):
-        types["result"] = 9
+    triads_checks = [
+        (
+            groups_triads["intelligence"]["instinct"]
+            > groups_triads["intelligence"]["thinking"]
+            and groups_triads["intelligence"]["instinct"]
+            > groups_triads["intelligence"]["feeling"]
+            and groups_triads["hornevian"]["dutiful"]
+            > groups_triads["hornevian"]["assertive"]
+            and groups_triads["hornevian"]["dutiful"]
+            > groups_triads["hornevian"]["withdrawn"]
+            and groups_triads["harmonic"]["competency"]
+            > groups_triads["harmonic"]["reactive"]
+            and groups_triads["harmonic"]["competency"]
+            > groups_triads["harmonic"]["positive"]
+        ),
+        (
+            groups_triads["intelligence"]["feeling"]
+            > groups_triads["intelligence"]["thinking"]
+            and groups_triads["intelligence"]["feeling"]
+            > groups_triads["intelligence"]["instinct"]
+            and groups_triads["hornevian"]["dutiful"]
+            > groups_triads["hornevian"]["assertive"]
+            and groups_triads["hornevian"]["dutiful"]
+            > groups_triads["hornevian"]["withdrawn"]
+            and groups_triads["harmonic"]["positive"]
+            > groups_triads["harmonic"]["reactive"]
+            and groups_triads["harmonic"]["positive"]
+            > groups_triads["harmonic"]["competency"]
+        ),
+        (
+            groups_triads["intelligence"]["feeling"]
+            > groups_triads["intelligence"]["thinking"]
+            and groups_triads["intelligence"]["feeling"]
+            > groups_triads["intelligence"]["instinct"]
+            and groups_triads["hornevian"]["assertive"]
+            > groups_triads["hornevian"]["dutiful"]
+            and groups_triads["hornevian"]["assertive"]
+            > groups_triads["hornevian"]["withdrawn"]
+            and groups_triads["harmonic"]["competency"]
+            > groups_triads["harmonic"]["reactive"]
+            and groups_triads["harmonic"]["competency"]
+            > groups_triads["harmonic"]["positive"]
+        ),
+        (
+            groups_triads["intelligence"]["feeling"]
+            > groups_triads["intelligence"]["thinking"]
+            and groups_triads["intelligence"]["feeling"]
+            > groups_triads["intelligence"]["instinct"]
+            and groups_triads["hornevian"]["withdrawn"]
+            > groups_triads["hornevian"]["dutiful"]
+            and groups_triads["hornevian"]["withdrawn"]
+            > groups_triads["hornevian"]["assertive"]
+            and groups_triads["harmonic"]["reactive"]
+            > groups_triads["harmonic"]["competency"]
+            and groups_triads["harmonic"]["reactive"]
+            > groups_triads["harmonic"]["positive"]
+        ),
+        (
+            groups_triads["intelligence"]["thinking"]
+            > groups_triads["intelligence"]["feeling"]
+            and groups_triads["intelligence"]["thinking"]
+            > groups_triads["intelligence"]["instinct"]
+            and groups_triads["hornevian"]["withdrawn"]
+            > groups_triads["hornevian"]["dutiful"]
+            and groups_triads["hornevian"]["withdrawn"]
+            > groups_triads["hornevian"]["assertive"]
+            and groups_triads["harmonic"]["competency"]
+            > groups_triads["harmonic"]["reactive"]
+            and groups_triads["harmonic"]["competency"]
+            > groups_triads["harmonic"]["positive"]
+        ),
+        (
+            groups_triads["intelligence"]["thinking"]
+            > groups_triads["intelligence"]["feeling"]
+            and groups_triads["intelligence"]["thinking"]
+            > groups_triads["intelligence"]["instinct"]
+            and groups_triads["hornevian"]["dutiful"]
+            > groups_triads["hornevian"]["withdrawn"]
+            and groups_triads["hornevian"]["dutiful"]
+            > groups_triads["hornevian"]["assertive"]
+            and groups_triads["harmonic"]["reactive"]
+            > groups_triads["harmonic"]["competency"]
+            and groups_triads["harmonic"]["reactive"]
+            > groups_triads["harmonic"]["positive"]
+        ),
+        (
+            groups_triads["intelligence"]["thinking"]
+            > groups_triads["intelligence"]["feeling"]
+            and groups_triads["intelligence"]["thinking"]
+            > groups_triads["intelligence"]["instinct"]
+            and groups_triads["hornevian"]["assertive"]
+            > groups_triads["hornevian"]["withdrawn"]
+            and groups_triads["hornevian"]["assertive"]
+            > groups_triads["hornevian"]["dutiful"]
+            and groups_triads["harmonic"]["positive"]
+            > groups_triads["harmonic"]["competency"]
+            and groups_triads["harmonic"]["positive"]
+            > groups_triads["harmonic"]["reactive"]
+        ),
+        (
+            groups_triads["intelligence"]["instinct"]
+            > groups_triads["intelligence"]["feeling"]
+            and groups_triads["intelligence"]["instinct"]
+            > groups_triads["intelligence"]["thinking"]
+            and groups_triads["hornevian"]["assertive"]
+            > groups_triads["hornevian"]["withdrawn"]
+            and groups_triads["hornevian"]["assertive"]
+            > groups_triads["hornevian"]["dutiful"]
+            and groups_triads["harmonic"]["reactive"]
+            > groups_triads["harmonic"]["competency"]
+            and groups_triads["harmonic"]["reactive"]
+            > groups_triads["harmonic"]["positive"]
+        ),
+        (
+            groups_triads["intelligence"]["instinct"]
+            > groups_triads["intelligence"]["feeling"]
+            and groups_triads["intelligence"]["instinct"]
+            > groups_triads["intelligence"]["thinking"]
+            and groups_triads["hornevian"]["withdrawn"]
+            > groups_triads["hornevian"]["assertive"]
+            and groups_triads["hornevian"]["withdrawn"]
+            > groups_triads["hornevian"]["dutiful"]
+            and groups_triads["harmonic"]["positive"]
+            > groups_triads["harmonic"]["reactive"]
+            and groups_triads["harmonic"]["positive"]
+            > groups_triads["harmonic"]["positive"]
+        ),
+    ]
+
+    for index, check in enumerate(triads_checks, start=1):
+        if check:
+            types["result"] = index
+            break
 
     return types["result"]
 

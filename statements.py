@@ -1,6 +1,6 @@
-#!/usr/bin/env python3.11
+#!/usr/bin/env python3
 
-import constants
+import constants as consts
 from ansiwrap import *
 
 question_number = 1
@@ -17,10 +17,8 @@ def statement(
     Returns a tuple
     """
     global question_number
-    statement_1_wrapped = wrap(
-        "{}. {} [{}]".format(question_number, statement_1, option_1), 80
-    )
-    statement_2_wrapped = wrap("{} [{}]".format(statement_2, option_2), 80)
+    statement_1_wrapped = wrap(f"{question_number}. {statement_1} [{option_1}]", 80)
+    statement_2_wrapped = wrap(f"{statement_2} [{option_2}]", 80)
 
     print("")
     print("\n".join(statement_1_wrapped))
@@ -28,11 +26,12 @@ def statement(
     question_number += 1
 
     while True:
-        answer = input()
-        if answer == option_1 or answer == option_1.lower():
+        answer = input().upper()
+
+        if answer == option_1:
             statement_1_type += 1
             return statement_1_type, statement_2_type
-        elif answer == option_2 or answer == option_2.lower():
+        elif answer == option_2:
             statement_2_type += 1
             return statement_1_type, statement_2_type
         elif answer == ">":
@@ -46,7 +45,7 @@ def print_statements(language, types):
     Prints all test statements, based on the language chosen, and uses the statements template declared in the function statement()
     """
     match language:
-        case constants.ENGLISH:
+        case consts.ENGLISH:
             # Statement Pair 1
             types["e_4"], types["b_6"] = statement(
                 "I've been romantic and imaginative.",
@@ -1606,7 +1605,7 @@ def print_statements(language, types):
                 types["c_3"],
             )
 
-        case constants.PORTUGUESE:
+        case consts.PORTUGUESE:
             # Par de Frases 1
             types["e_4"], types["b_6"] = statement(
                 "Eu tenho sido romântico e imaginativo.",

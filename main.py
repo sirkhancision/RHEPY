@@ -1,8 +1,8 @@
-#!/usr/bin/env python3.11
+#!/usr/bin/env python3
 
 import sys
-import constants
-import RHEPY_lang
+import RHEPY_lang as lang
+import constants as consts
 from colorama import Fore, init
 from statements import print_statements
 
@@ -11,6 +11,9 @@ init()
 
 
 def print_greeting():
+    """
+    Prints the first line of text, with or without the enneagram symbol ASCII art
+    """
     display_symbol = True
 
     for arg in sys.argv:
@@ -30,6 +33,9 @@ def print_greeting():
 
 
 def language_choice():
+    """
+    Select the language of the text displayed
+    """
     print(
         "Select the language of the test:\n"
         "(select a different option to exit)\n"
@@ -41,7 +47,7 @@ def language_choice():
     )
 
     language = input()
-    if language != constants.ENGLISH and language != constants.PORTUGUESE:
+    if language != consts.ENGLISH and language != consts.PORTUGUESE:
         print("Exiting...")
         sys.exit(0)
 
@@ -49,8 +55,12 @@ def language_choice():
 
 
 def instructions_or_test_choice(language):
+    """
+    Prints translated prompt for selecting if the user wants to read the
+    instructions or go directly to the test
+    """
     match language:
-        case constants.ENGLISH:
+        case consts.ENGLISH:
             print(
                 Fore.RED
                 + "[1] "
@@ -63,7 +73,7 @@ def instructions_or_test_choice(language):
                 + Fore.RESET
             )
             choice = input()
-        case constants.PORTUGUESE:
+        case consts.PORTUGUESE:
             print(
                 Fore.RED
                 + "[1] "
@@ -82,40 +92,40 @@ def instructions_or_test_choice(language):
     return choice
 
 
-try:
+def main():
+    # the nine Enneagram types and the resulting type from the test
+    enneagram_types = {
+        "d_1": 0,
+        "f_2": 0,
+        "c_3": 0,
+        "e_4": 0,
+        "h_5": 0,
+        "b_6": 0,
+        "i_7": 0,
+        "g_8": 0,
+        "a_9": 0,
+        "result": 0,
+    }
 
-    def main():
-        # the nine Enneagram types and the resulting type from the test
-        enneagram_types = {
-            "d_1": 0,
-            "f_2": 0,
-            "c_3": 0,
-            "e_4": 0,
-            "h_5": 0,
-            "b_6": 0,
-            "i_7": 0,
-            "g_8": 0,
-            "a_9": 0,
-            "result": 0,
-        }
+    print_greeting()
+    language = language_choice()
+    lang.print_post_greeting(language)
 
-        print_greeting()
-        language = language_choice()
-        RHEPY_lang.print_post_greeting(language)
-
-        while True:
-            choice = instructions_or_test_choice(language)
-            if choice == constants.INSTRUCTIONS:
-                RHEPY_lang.print_instructions(language)
-            elif choice == constants.TEST:
+    while True:
+        choice = instructions_or_test_choice(language)
+        match choice:
+            case consts.INSTRUCTIONS:
+                lang.print_instructions(language)
+            case consts.TEST:
                 break
 
-        print_statements(language, enneagram_types)
-        RHEPY_lang.print_result(language, enneagram_types)
+    print_statements(language, enneagram_types)
+    lang.print_result(language, enneagram_types)
 
-    if __name__ == "__main__":
+
+if __name__ == "__main__":
+    try:
         main()
-
-except KeyboardInterrupt:
-    print("\nEnded by user, exiting...")
-    sys.exit(0)
+    except KeyboardInterrupt:
+        print("\nEnded by user, exiting...")
+        sys.exit(0)

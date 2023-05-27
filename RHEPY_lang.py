@@ -1,6 +1,6 @@
-#!/usr/bin/env python3.11
+#!/usr/bin/env python3
 
-import constants
+import constants as consts
 from ansiwrap import *
 from colorama import Fore, init
 from results import result_type, result_wing
@@ -14,7 +14,7 @@ def print_post_greeting(language):
     Prints the text after the initial greeting text, even though it's also a greeting
     """
     match language:
-        case constants.ENGLISH:
+        case consts.ENGLISH:
             print(
                 "Welcome to "
                 + Fore.CYAN
@@ -23,7 +23,7 @@ def print_post_greeting(language):
                 + ", the Riso-Hudson Enneagram Type Indicator (RHETI) in Python!\n"
                 "Enter [1] to proceed with the instructions, or [2] to go directly to the test",
             )
-        case constants.PORTUGUESE:
+        case consts.PORTUGUESE:
             print(
                 "Bem-vindo ao "
                 + Fore.CYAN
@@ -39,7 +39,7 @@ def print_instructions(language):
     Prints the instructions to the test
     """
     match language:
-        case constants.ENGLISH:
+        case consts.ENGLISH:
             print(
                 "\n".join(
                     wrap(
@@ -81,9 +81,11 @@ def print_instructions(language):
                     )
                 )
             )
+            print("")
+
             print(
                 Fore.BLUE
-                + "\nhttps://www.enneagraminstitute.com/ "
+                + "https://www.enneagraminstitute.com/ "
                 + Fore.RESET
                 + "(English)\n"
                 + Fore.BLUE
@@ -104,7 +106,7 @@ def print_instructions(language):
                 )
             )
             print("")
-        case constants.PORTUGUESE:
+        case consts.PORTUGUESE:
             print(
                 "\n".join(
                     wrap(
@@ -118,6 +120,7 @@ def print_instructions(language):
                 )
             )
             print("")
+
             print(
                 "\n".join(
                     wrap(
@@ -127,6 +130,7 @@ def print_instructions(language):
                 )
             )
             print("")
+
             print(
                 "\n".join(
                     wrap(
@@ -136,6 +140,7 @@ def print_instructions(language):
                 )
             )
             print("")
+
             print(
                 "\n".join(
                     wrap(
@@ -145,9 +150,10 @@ def print_instructions(language):
                 )
             )
             print("")
+
             print(
                 Fore.BLUE
-                + "\nhttps://www.enneagraminstitute.com/ "
+                + "https://www.enneagraminstitute.com/ "
                 + Fore.RESET
                 + " (Inglês)\n"
                 + Fore.BLUE
@@ -177,16 +183,15 @@ def print_result(language, types):
     result = {"type": result_type(types), "wing": result_wing(types)}
 
     match language:
-        case constants.ENGLISH:
+        case consts.ENGLISH:
             print("RESULTS:\n")
 
             if result["wing"] > 0:
                 print(
                     "Your type is likely: "
                     + Fore.RED
-                    + "Enneagram Type {}w{}"
+                    + f"Enneagram Type {result['type']}w{result['wing']}"
                     + Fore.RESET
-                    + "\n".format(result["type"], result["wing"])
                 )
             elif result["type"] == 0 and result["wing"] == 0:
                 print(
@@ -200,40 +205,29 @@ def print_result(language, types):
                 print(
                     "Your type is likely: "
                     + Fore.RED
-                    + "Enneagram Type {} "
+                    + f"Enneagram Type {result['type']} "
                     + Fore.RESET
-                    + "(wing couldn't be calculated)\n".format(result["type"])
+                    + "(wing couldn't be calculated)\n"
                 )
 
             print(
                 "Score:\n"
-                "Type 1: {}\tType 2: {}\tType 3: {}\n"
-                "Type 4: {}\tType 5: {}\tType 6: {}\n"
-                "Type 7: {}\tType 8: {}\tType 9: {}\n".format(
-                    types["d_1"],
-                    types["f_2"],
-                    types["c_3"],
-                    types["e_4"],
-                    types["h_5"],
-                    types["b_6"],
-                    types["i_7"],
-                    types["g_8"],
-                    types["a_9"],
-                )
+                f"Type 1: {types['d_1']}\tType 2: {types['f_2']}\tType 3: {types['c_3']}\n"
+                f"Type 4: {types['e_4']}\tType 5: {types['h_5']}\tType 6: {types['b_6']}\n"
+                f"Type 7: {types['i_7']}\tType 8: {types['g_8']}\tType 9: {types['a_9']}\n"
             )
 
             print("Thanks for using RHEPY! :)")
 
-        case constants.PORTUGUESE:
+        case consts.PORTUGUESE:
             print("RESULTADOS:\n")
 
             if result["wing"] > 0:
                 print(
                     "Seu tipo é provavelmente: "
                     + Fore.RED
-                    + "Tipo {}w{} do Eneagrama"
+                    + f"Tipo {result['type']}w{result['wing']} do Eneagrama"
                     + Fore.RESET
-                    + "\n".format(result["type"], result["wing"])
                 )
             elif result["type"] == 0 and result["wing"] == 0:
                 print(
@@ -247,26 +241,16 @@ def print_result(language, types):
                 print(
                     "Seu tipo é provavelmente: "
                     + Fore.RED
-                    + "Tipo {} do Eneagrama "
+                    + f"Tipo {result['type']} do Eneagrama "
                     + Fore.RESET
-                    + "(asa não pôde ser calculada)\n".format(result["type"])
+                    + "(asa não pôde ser calculada)\n"
                 )
 
             print(
                 "Pontuação:\n"
-                "Tipo 1: {}\tTipo 2: {}\tTipo 3: {}\n"
-                "Tipo 4: {}\tTipo 5: {}\tTipo 6: {}\n"
-                "Tipo 7: {}\tTipo 8: {}\tTipo 9: {}\n".format(
-                    types["d_1"],
-                    types["f_2"],
-                    types["c_3"],
-                    types["e_4"],
-                    types["h_5"],
-                    types["b_6"],
-                    types["i_7"],
-                    types["g_8"],
-                    types["a_9"],
-                )
+                f"Tipo 1: {types['d_1']}\tTipo 2: {types['f_2']}\tTipo 3: {types['c_3']}\n"
+                f"Tipo 4: {types['e_4']}\tTipo 5: {types['h_5']}\tTipo 6: {types['b_6']}\n"
+                f"Tipo 7: {types['i_7']}\tTipo 8: {types['g_8']}\tTipo 9: {types['a_9']}\n"
             )
 
             print("Obrigado por usar o RHEPY! :)")
