@@ -1,17 +1,50 @@
-#!/usr/bin/env python3
-
-
-def result_type(types):
+def highest_score(types, scores_table, sorted_types):
     """
-    Calculates the Enneagram Type, using various methods
-
-    Methods used:
-    Result = highest scored type
-    Result = (if two highest scored types have the same score) type with highest score wing
-    Result = type corresponding to highest scored triads
-
-    Returns an int
+    Select the type with the highest score
     """
+    highest_score = sorted_types[-1]
+
+    if all(types) == 0:
+        raise ValueError("Test score is zero")
+
+    for score, type in scores_table.items():
+        if score == highest_score:
+            return type
+
+
+def wing_tie(types, scores_table, sorted_types):
+    """
+    In case there are two top types with the same score, select
+    the one with higher scored wings
+    """
+    second_highest = 0
+    wing_sum = 0
+
+    if all(types) == 0:
+        raise ValueError("Test score is zero")
+
+    if sorted_types[-1] == sorted_types[-2]:
+        for score, type in scores_table.items():
+            if sorted_types[-2] == score and type != types["result"]:
+                second_highest = type
+                break
+
+    for index, (score, type) in enumerate(scores_table.items()):
+        if type == types["result"] or type == second_highest:
+            wing_sum += (index + 1) * score
+
+    if wing_sum < 5 * 2 * (second_highest + sorted_types[-2]):
+        return second_highest
+
+
+def check_triads(types):
+    """
+    Check if the score correlates to the triad groups for a type,
+    and select it if so
+    """
+    if all(types) == 0:
+        raise ValueError("Test score is zero")
+
     groups_triads = {
         "intelligence": {
             "feeling": types["f_2"] + types["c_3"] + types["e_4"],
@@ -30,47 +63,7 @@ def result_type(types):
         },
     }
 
-    scores_table = {
-        types["d_1"]: 1,
-        types["f_2"]: 2,
-        types["c_3"]: 3,
-        types["e_4"]: 4,
-        types["h_5"]: 5,
-        types["b_6"]: 6,
-        types["i_7"]: 7,
-        types["g_8"]: 8,
-        types["a_9"]: 9,
-    }
-
-    # highest score method
-    sorted_types = sorted(types.values())
-    highest_score = sorted_types[8]
-
-    for key, value in scores_table.items():
-        if key == highest_score:
-            base_result = value
-            break
-    types["result"] = base_result
-
-    # in case there are two top types with the same score, select
-    # the one with higher scored wings
-    second_highest = 0
-    if sorted_types[8] == sorted_types[7]:
-        for key, value in scores_table.items():
-            if sorted_types[7] == key and value != types["result"]:
-                second_highest = value
-                break
-
-    wing_sum = 0
-    for index, (key, value) in enumerate(scores_table.items()):
-        if value == types["result"] or value == second_highest:
-            wing_sum += (index + 1) * key
-
-    if wing_sum < 5 * 2 * (second_highest + sorted_types[7]):
-        types["result"] = second_highest
-
-    # triads method
-    triads_checks = [
+    checks = [
         (
             groups_triads["intelligence"]["instinct"]
             > groups_triads["intelligence"]["thinking"]
@@ -199,10 +192,36 @@ def result_type(types):
         ),
     ]
 
-    for index, check in enumerate(triads_checks, start=1):
+    for index, check in enumerate(checks, start=1):
         if check:
-            types["result"] = index
-            break
+            return index
+
+
+def result_type(types):
+    """
+    Calculates the Enneagram Type, using various methods
+    """
+    scores_table = {
+        types["d_1"]: 1,
+        types["f_2"]: 2,
+        types["c_3"]: 3,
+        types["e_4"]: 4,
+        types["h_5"]: 5,
+        types["b_6"]: 6,
+        types["i_7"]: 7,
+        types["g_8"]: 8,
+        types["a_9"]: 9,
+    }
+
+    sorted_types = sorted(types.values())
+
+    try:
+        types["result"] = highest_score(types, scores_table, sorted_types)
+        types["result"] = (wing_tie(types, scores_table, sorted_types) or
+                           types["result"])
+        types["result"] = check_triads(types) or types["result"]
+    except ValueError:
+        raise ValueError("Test score is zero")
 
     return types["result"]
 
@@ -211,9 +230,8 @@ def result_wing(types):
     """
     Calculates the Enneagram Type's wing
 
-    It just checks which type, corresponding to the wing of the matched basic type, has a higher score, and assigns the respective wing to it
-
-    Returns an int
+    It just checks which type, corresponding to the wing of the matched basic
+    type, has a higher score, and assigns the respective wing to it
     """
     match types["result"]:
         case 1:
