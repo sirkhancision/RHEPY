@@ -1,206 +1,161 @@
-#!/usr/bin/env python3
-
-import constants as consts
-from ansiwrap import *
-from colorama import Fore, init
+from ansiwrap import wrap
+from constants import ENGLISH, PORTUGUESE
+from colorama import Fore
 from results import result_type, result_wing
-
-# initialize colorama
-init()
 
 
 def print_post_greeting(language):
     """
-    Prints the text after the initial greeting text, even though it's also a greeting
+    Prints the text after the initial greeting text, even though it's also
+    a greeting
     """
-    match language:
-        case consts.ENGLISH:
-            print(
-                "Welcome to "
-                + Fore.CYAN
-                + "RHEPY"
-                + Fore.RESET
-                + ", the Riso-Hudson Enneagram Type Indicator (RHETI) in Python!\n"
-                "Enter [1] to proceed with the instructions, or [2] to go directly to the test",
-            )
-        case consts.PORTUGUESE:
-            print(
-                "Bem-vindo ao "
-                + Fore.CYAN
-                + "RHEPY"
-                + Fore.RESET
-                + ", o Indicador de Tipo do Eneagrama de Riso-Hudson (RHETI) em Python!\n"
-                "Digite [1] para seguir com as instruções ou [2] para ir direto ao teste",
-            )
+    greetings = {
+        ENGLISH: ("Welcome to " + Fore.CYAN + "RHEPY" + Fore.RESET +
+                  ", the Riso-Hudson Enneagram Type Indicator (RHETI) in "
+                  "Python!\n"
+                  "Enter [1] to proceed with the instructions, or "
+                  "[2] to go directly to the test"),
+        PORTUGUESE:
+        ("Bem-vindo ao " + Fore.CYAN + "RHEPY" + Fore.RESET +
+         ", o Indicador de Tipo do Eneagrama de Riso-Hudson (RHETI) "
+         "em Python!\n"
+         "Digite [1] para seguir com as instruções ou "
+         "[2] para ir direto ao teste"),
+    }
+
+    greeting = greetings.get(language)
+    if greeting:
+        print(greeting)
+    else:
+        raise ValueError("Invalid language")
 
 
 def print_instructions(language):
     """
     Prints the instructions to the test
     """
-    match language:
-        case consts.ENGLISH:
-            print(
-                "\n".join(
-                    wrap(
-                        "This test has "
-                        + Fore.RED
-                        + "144 "
-                        + Fore.RESET
-                        + "paired statements, where you have to choose the statement in each pair that describes you best. Even if you feel that in certain pairs, neither describes you very well, or that both statements are almost equally true, you must try to choose the statement that describes you best.",
-                        80,
-                    )
-                )
-            )
+    instructions = {
+        ENGLISH: [
+            ("This test has " + Fore.RED + "144 " + Fore.RESET +
+             "paired statements, where you have to choose the statement "
+             "in each pair that describes you best. Even if you feel "
+             "that in certain pairs, neither describes you very well, "
+             "or that both statements are almost equally true, you must "
+             "try to choose the statement that describes you best."),
+            ("The most accurate approach to the test is to take it from "
+             "the point of view of the past, as you have been most of "
+             "your life. You must enter the letter that corresponds to "
+             "the statement you want to select. If you're unsure of what "
+             "to choose, you can skip the current pair by entering [>]."),
+            ("The profile you get from RHEPY will reflect your "
+             "personality's principal psychological functions, the "
+             "balance of which changes over time. Your basic personality "
+             "type should remain the same, but other personality "
+             "functions shift over time. You might also want to take "
+             "the test as you are in the present, after you've taken "
+             "it before. This test takes approximately 40 minutes to "
+             "complete."),
+            ("After you've taken the test, it's recommended that you "
+             "read about the Enneagram type you got as a result. Personal "
+             "recommendations are:"),
+            (Fore.BLUE + "https://www.enneagraminstitute.com/ " + Fore.RESET +
+             "(English)\n" + Fore.BLUE +
+             "https://os16mistypes.wixsite.com/16mistypes " + Fore.RESET +
+             "(Portuguese)\n"),
+            (Fore.RED + "PLEASE NOTE! " + Fore.RESET + 'The accuracy '
+             'of this test will be increased if you understand that '
+             'we have four "selves": our past self, our present self, '
+             'our ideal self, and our self as others see us. RHEPY is '
+             'attempting to discern only your past self. Therefore, '
+             'it\'s essential that you keep your focus on answering '
+             'in your past self only, and not mix your past, present, '
+             'ideal, or social self.'),
+        ],
+        PORTUGUESE: [
+            ("Esse teste possui " + Fore.RED + "144 " + Fore.RESET +
+             "pares de frases, onde você tem que escolher a frase em "
+             "cada par que lhe descreve melhor. Até se você sentir "
+             "que em certos pares, nenhum te descreve muito bem, ou que "
+             "ambas as frases são quase igualmente verdadeiras, você "
+             "deve tentar escolher a frase que lhe descreve melhor. "),
+            ("A abordagem mais precisa para o teste é fazê-lo "
+             "pelo ponto de vista do passado, como você tem sido "
+             "na maior parte de sua vida. Você deve digitar a letra "
+             "correspondente à frase que você deseja selecionar. Se "
+             "você estiver incerto do que escolher, você pode pular "
+             "o par atual se digitar [>]."),
+            ("O perfil que você receberá do RHEPY irá refletir as "
+             "principais funções psicológicas da sua personalidade, "
+             "da qual o equilibrio muda com o tempo. O seu tipo básico "
+             "de personalidade deve continuar o mesmo, mas outras "
+             "funções da personalidade mudam com o tempo. Você pode "
+             "querer também fazer o teste pensando em como você é "
+             "no presente, depois de já tê-lo feito. Esse teste leva "
+             "aproximadamente 40 minutos para fazer."),
+            ("Após ter feito o teste, é recomendado que você "
+             "leia sobre o tipo do Eneagrama que você obteve como "
+             "resultado. Recomendações pessoais são:"),
+            (Fore.BLUE + "https://www.enneagraminstitute.com/ " + Fore.RESET +
+             " (Inglês)\n" + Fore.BLUE +
+             "https://os16mistypes.wixsite.com/16mistypes " + Fore.RESET +
+             " (Português)\n"),
+            (Fore.RED + "ATENÇÃO! " + Fore.RESET + 'A precisão desse '
+             'teste será aumentada se você entender que possuímos '
+             'quatro "eus": o nosso eu do passado, o nosso eu do '
+             'presente, o nosso eu ideal, e o eu como os outros nos '
+             'veem. O RHEPY está tentando discernir apenas o seu eu do '
+             'passado. Portanto, é essencial que você mantenha o foco '
+             'em responder apenas no seu eu do passado, e não misturar '
+             'o seu eu do passado, presente, ideal, ou social.'),
+        ],
+    }
+
+    instructions_output = instructions.get(language)
+    if instructions_output:
+        for paragraph in instructions_output:
+            print("\n".join(wrap(paragraph, 80)))
             print("")
-
-            print(
-                "\n".join(
-                    wrap(
-                        "The most accurate approach to the test is to take it from the point of view of the past, as you have been most of your life. You must enter the letter that corresponds to the statement you want to select. If you're unsure of what to choose, you can skip the current pair by entering [>].",
-                        80,
-                    )
-                )
-            )
-            print("")
-
-            print(
-                "\n".join(
-                    wrap(
-                        "The profile you get from RHEPY will reflect your personality's principal psychological functions, the balance of which changes over time. Your basic personality type should remain the same, but other personality functions shift over time. You might also want to take the test as you are in the present, after you've taken it before. This test takes approximately 40 minutes to complete.",
-                        80,
-                    )
-                )
-            )
-
-            print(
-                "\n".join(
-                    wrap(
-                        "After you've taken the test, it's recommended that you read about the Enneagram type you got as a result. Personal recommendations are:",
-                        80,
-                    )
-                )
-            )
-            print("")
-
-            print(
-                Fore.BLUE
-                + "https://www.enneagraminstitute.com/ "
-                + Fore.RESET
-                + "(English)\n"
-                + Fore.BLUE
-                + "https://os16mistypes.wixsite.com/16mistypes "
-                + Fore.RESET
-                + "(Portuguese)\n",
-            )
-
-            print(
-                "\n".join(
-                    wrap(
-                        Fore.RED
-                        + "PLEASE NOTE! "
-                        + Fore.RESET
-                        + 'The accuracy of this test will be increased if you understand that we have four "selves": our past self, our present self, our ideal self, and our self as others see us. RHEPY is attempting to discern only your past self. Therefore, it\'s essential that you keep your focus on answering in your past self only, and not mix your past, present, ideal, or social self.',
-                        80,
-                    )
-                )
-            )
-            print("")
-        case consts.PORTUGUESE:
-            print(
-                "\n".join(
-                    wrap(
-                        "Esse teste possui "
-                        + Fore.RED
-                        + "144 "
-                        + Fore.RESET
-                        + "pares de frases, onde você tem que escolher a frase em cada par que lhe descreve melhor. Até se você sentir que em certos pares, nenhum te descreve muito bem, ou que ambas as frases são quase igualmente verdadeiras, você deve tentar escolher a frase que lhe descreve melhor.",
-                        80,
-                    )
-                )
-            )
-            print("")
-
-            print(
-                "\n".join(
-                    wrap(
-                        "A abordagem mais precisa para o teste é fazê-lo pelo ponto de vista do passado, como você tem sido na maior parte de sua vida. Você deve digitar a letra correspondente à frase que você deseja selecionar. Se você estiver incerto do que escolher, você pode pular o par atual se digitar [>].",
-                        80,
-                    )
-                )
-            )
-            print("")
-
-            print(
-                "\n".join(
-                    wrap(
-                        "O perfil que você receberá do RHEPY irá refletir as principais funções psicológicas da sua personalidade, da qual o equilibrio muda com o tempo. O seu tipo básico de personalidade deve continuar o mesmo, mas outras funções da personalidade mudam com o tempo. Você pode querer também fazer o teste pensando em como vocẽ é no presente, depois de já tê-lo feito. Esse teste leva aproximadamente 40 minutos para fazer.",
-                        80,
-                    )
-                )
-            )
-            print("")
-
-            print(
-                "\n".join(
-                    wrap(
-                        "Após ter feito o teste, é recomendado que você leia sobre o tipo do Eneagrama que você obteve como resultado. Recomendações pessoais são:",
-                        80,
-                    )
-                )
-            )
-            print("")
-
-            print(
-                Fore.BLUE
-                + "https://www.enneagraminstitute.com/ "
-                + Fore.RESET
-                + " (Inglês)\n"
-                + Fore.BLUE
-                + "https://os16mistypes.wixsite.com/16mistypes "
-                + Fore.RESET
-                + " (Português)\n",
-            )
-
-            print(
-                "\n".join(
-                    wrap(
-                        Fore.RED
-                        + "ATENÇÃO! "
-                        + Fore.RESET
-                        + 'A precisão desse teste será aumentada se você entender que possuímos quatro "eus": o nosso eu do passado, o nosso eu do presente, o nosso eu ideal, e o eu como os outros nos veem. O RHEPY está tentando discernir apenas o seu eu do passado. Portanto, é essencial que você mantenha o foco em responder apenas no seu eu do passado, e não misturar o seu eu do passado, presente, ideal, ou social.',
-                        80,
-                    )
-                )
-            )
-            print("")
+    else:
+        raise ValueError("Invalid language")
 
 
 def print_result_explanation(language):
     """
     Prints an explanation about how the results are calculated
     """
-    match language:
-        case consts.ENGLISH:
-            print(
-                "\n".join(
-                    wrap(
-                        "The results of RHEPY are calculated, first, by the highest scored type in the test. Then, if two types are tied, the one with the highest scored wings takes precedence. Lastly, it checks if your overall score matches a set of conditions that correlate to one specific type, and if it does, that ends up being your resulting type. So, even if your resulting type is not the highest scored type in the test, that's not a mistake!",
-                        80,
-                    )
-                )
-            )
+    explanation = {
+        ENGLISH: [
+            ("The results of RHEPY are calculated, first, by the "
+             "highest scored type in the test. Then, if two types "
+             "are tied, the one with the highest scored wings "
+             "takes precedence. Lastly, it checks if your overall "
+             "score matches a set of conditions that correlate to "
+             "one specific type, and if it does, that ends up "
+             "being your resulting type. So, even if your "
+             "resulting type is not the highest scored type in "
+             "the test, that's not a mistake!"),
+        ],
+        PORTUGUESE: [
+            ("Os resultados do RHEPY são calculados, primeiro, "
+             "pelo tipo com a maior pontuação no teste. Então, "
+             "se dois tipos estiverem empatados, o tipo com as "
+             "asas de maior pontuação toma prioridade. Por último, "
+             "ele checa se sua pontuação geral corresponde a uma "
+             "série de condições correlacionadas a um tipo "
+             "específico, e se sim, este fica sendo o seu tipo "
+             "resultante. Portanto, mesmo que o seu tipo "
+             "resultante não seja o de maior pontuação no teste, "
+             "isso não é um erro!"),
+        ],
+    }
+
+    explanation_output = explanation.get(language)
+    if explanation_output:
+        for paragraph in explanation_output:
+            print("\n".join(wrap(paragraph, 80)))
             print("")
-        case consts.PORTUGUESE:
-            print(
-                "\n".join(
-                    wrap(
-                        "Os resultados do RHEPY são calculados, primeiro, pelo tipo com a maior pontuação no teste. Então, se dois tipos estiverem empatados, o tipo com as asas de maior pontuação toma prioridade. Por último, ele checa se sua pontuação geral corresponde a uma série de condições correlacionadas a um tipo específico, e se sim, este fica sendo o seu tipo resultante. Portanto, mesmo que o seu tipo resultante não seja o de maior pontuação no teste, isso não é um erro!",
-                        80,
-                    )
-                )
-            )
-            print("")
+    else:
+        raise ValueError("Invalid language")
 
 
 def print_result(language, types):
@@ -209,75 +164,86 @@ def print_result(language, types):
     """
     result = {"type": result_type(types), "wing": result_wing(types)}
 
-    match language:
-        case consts.ENGLISH:
-            print("RESULTS:\n")
+    results = {
+        ENGLISH: {
+            "wing":
+            "Your type is likely: " + Fore.RED +
+            f"Enneagram Type {result['type']}w{result['wing']}" + Fore.RESET,
+            "type":
+            "Your type is likely: " + Fore.RED +
+            f"Enneagram Type {result['type']} " + Fore.RESET +
+            "(wing couldn't be calculated)",
+            "score_header":
+            "Score:\n",
+            "thanks":
+            "Thanks for using RHEPY! :)",
+            "type_labels": {
+                "1": "Type 1",
+                "2": "Type 2",
+                "3": "Type 3",
+                "4": "Type 4",
+                "5": "Type 5",
+                "6": "Type 6",
+                "7": "Type 7",
+                "8": "Type 8",
+                "9": "Type 9",
+            },
+        },
+        PORTUGUESE: {
+            "wing":
+            "Seu tipo é provavelmente: " + Fore.RED +
+            f"Tipo {result['type']}w{result['wing']} do Eneagrama" +
+            Fore.RESET,
+            "type":
+            "Seu tipo é provavelmente: " + Fore.RED +
+            f"Tipo {result['type']} " + Fore.RESET +
+            "(asa não pôde ser calculada)",
+            "score_header":
+            "Pontuação:\n",
+            "thanks":
+            "Obrigado por usar o RHEPY! :)",
+            "type_labels": {
+                "1": "Tipo 1",
+                "2": "Tipo 2",
+                "3": "Tipo 3",
+                "4": "Tipo 4",
+                "5": "Tipo 5",
+                "6": "Tipo 6",
+                "7": "Tipo 7",
+                "8": "Tipo 8",
+                "9": "Tipo 9",
+            },
+        },
+    }
 
-            if result["wing"] > 0:
-                print(
-                    "Your type is likely: "
-                    + Fore.RED
-                    + f"Enneagram Type {result['type']}w{result['wing']}"
-                    + Fore.RESET
-                )
-            elif result["type"] == 0 and result["wing"] == 0:
-                print(
-                    "Your type is likely: "
-                    + Fore.RED
-                    + "a sneaky bastard"
-                    + Fore.RESET
-                    + "\n"
-                )
-            elif result["wing"] == 0:
-                print(
-                    "Your type is likely: "
-                    + Fore.RED
-                    + f"Enneagram Type {result['type']} "
-                    + Fore.RESET
-                    + "(wing couldn't be calculated)\n"
-                )
+    result_output = results.get(language)
+    if result_output:
+        print("RESULTS:\n" if language == ENGLISH else "RESULTADOS:\n")
 
-            print(
-                "Score:\n"
-                f"Type 1: {types['d_1']}\tType 2: {types['f_2']}\tType 3: {types['c_3']}\n"
-                f"Type 4: {types['e_4']}\tType 5: {types['h_5']}\tType 6: {types['b_6']}\n"
-                f"Type 7: {types['i_7']}\tType 8: {types['g_8']}\tType 9: {types['a_9']}\n"
-            )
+        if result["wing"] > 0:
+            print(result_output["wing"])
+        elif result["wing"] == 0:
+            print(result_output["type"])
 
-            print("Thanks for using RHEPY! :)")
+        print("\n" + result_output["score_header"])
+        type_labels = result_output["type_labels"]
 
-        case consts.PORTUGUESE:
-            print("RESULTADOS:\n")
+        print("\t".join([
+            type_labels["1"] + ": " + str(types['d_1']),
+            type_labels["2"] + ": " + str(types['f_2']),
+            type_labels["3"] + ": " + str(types['c_3'])
+        ]))
+        print("\t".join([
+            type_labels["4"] + ": " + str(types['e_4']),
+            type_labels["5"] + ": " + str(types['h_5']),
+            type_labels["6"] + ": " + str(types['b_6'])
+        ]))
+        print("\t".join([
+            type_labels["7"] + ": " + str(types['i_7']),
+            type_labels["8"] + ": " + str(types['g_8']),
+            type_labels["9"] + ": " + str(types['a_9'])
+        ]))
 
-            if result["wing"] > 0:
-                print(
-                    "Seu tipo é provavelmente: "
-                    + Fore.RED
-                    + f"Tipo {result['type']}w{result['wing']} do Eneagrama"
-                    + Fore.RESET
-                )
-            elif result["type"] == 0 and result["wing"] == 0:
-                print(
-                    "Seu tipo é provavelmente: "
-                    + Fore.RED
-                    + "um malandro sorrateiro"
-                    + Fore.RESET
-                    + "\n"
-                )
-            elif result["wing"] == 0:
-                print(
-                    "Seu tipo é provavelmente: "
-                    + Fore.RED
-                    + f"Tipo {result['type']} do Eneagrama "
-                    + Fore.RESET
-                    + "(asa não pôde ser calculada)\n"
-                )
-
-            print(
-                "Pontuação:\n"
-                f"Tipo 1: {types['d_1']}\tTipo 2: {types['f_2']}\tTipo 3: {types['c_3']}\n"
-                f"Tipo 4: {types['e_4']}\tTipo 5: {types['h_5']}\tTipo 6: {types['b_6']}\n"
-                f"Tipo 7: {types['i_7']}\tTipo 8: {types['g_8']}\tTipo 9: {types['a_9']}\n"
-            )
-
-            print("Obrigado por usar o RHEPY! :)")
+        print("\n" + result_output["thanks"])
+    else:
+        raise ValueError("Invalid language")
