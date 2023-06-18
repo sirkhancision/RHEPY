@@ -4,7 +4,7 @@ def highest_score(types, scores_table, sorted_types):
     """
     highest_score = sorted_types[-1]
 
-    if all(types) == 0:
+    if not all(types):
         raise ValueError("Test score is zero")
 
     for score, type in scores_table.items():
@@ -20,7 +20,7 @@ def wing_tie(types, scores_table, sorted_types):
     second_highest = 0
     wing_sum = 0
 
-    if all(types) == 0:
+    if not all(types):
         raise ValueError("Test score is zero")
 
     if sorted_types[-1] == sorted_types[-2]:
@@ -29,9 +29,14 @@ def wing_tie(types, scores_table, sorted_types):
                 second_highest = type
                 break
 
-    for index, (score, type) in enumerate(scores_table.items()):
-        if type == types["result"] or type == second_highest:
-            wing_sum += (index + 1) * score
+    wing_scores = [
+        scores_table[score]
+        for score, type in scores_table.items()
+        if type == types["result"] or type == second_highest
+    ]
+
+    for index, score in enumerate(wing_scores):
+        wing_sum += (index + 1) * score
 
     if wing_sum < 5 * 2 * (second_highest + sorted_types[-2]):
         return second_highest
