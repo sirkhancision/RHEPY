@@ -37,26 +37,26 @@ def print_instructions(language):
     instructions = {
         ENGLISH: [
             ("This test has " + Fore.RED + "144 " + Fore.RESET +
-             "paired statements, where you have to choose the statement "
-             "in each pair that describes you best. Even if you feel "
-             "that in certain pairs, neither describes you very well, "
+             "paired statements, and you have to choose the statement "
+             "in each pair that best describes you. Even if you feel "
+             "that in some pairs neither statement describes you very well, "
              "or that both statements are almost equally true, you must "
              "try to choose the statement that describes you best."),
             ("The most accurate approach to the test is to take it from "
-             "the point of view of the past, as you have been most of "
-             "your life. You must enter the letter that corresponds to "
-             "the statement you want to select. If you're unsure of what "
+             "the point of view of the past, as you have been for most of "
+             "your life. You must enter the letter corresponding to "
+             "the statement you wish to choose. If you're not sure of what "
              "to choose, you can skip the current pair by entering [>]."),
-            ("The profile you get from RHEPY will reflect your "
-             "personality's principal psychological functions, the "
-             "balance of which changes over time. Your basic personality "
-             "type should remain the same, but other personality "
-             "functions shift over time. You might also want to take "
-             "the test as you are in the present, after you've taken "
-             "it before. This test takes approximately 40 minutes to "
+            ("The profile you receive from RHEPY reflects the major "
+             "psychological functions of "
+             "your personality, the balance of which changes over time. Your "
+             "basic personality type should remain the same, but other "
+             "personality functions will change over time. You may also wish "
+             "to take the test as you are now, after you've taken "
+             "it before. The test takes about 40 minutes to "
              "complete."),
             ("After you've taken the test, it's recommended that you "
-             "read about the Enneagram type you got as a result. Personal "
+             "read about the Enneagram type you have been given. Personal "
              "recommendations are:"),
             (Fore.BLUE + "https://www.enneagraminstitute.com/ " + Fore.RESET +
              "(English)\n" + Fore.BLUE +
@@ -65,11 +65,11 @@ def print_instructions(language):
             (Fore.RED + "PLEASE NOTE! " + Fore.RESET + 'The accuracy '
              'of this test will be increased if you understand that '
              'we have four "selves": our past self, our present self, '
-             'our ideal self, and our self as others see us. RHEPY is '
-             'attempting to discern only your past self. Therefore, '
-             'it\'s essential that you keep your focus on answering '
-             'in your past self only, and not mix your past, present, '
-             'ideal, or social self.'),
+             'our ideal self, and our self as others see us. RHEPY only '
+             'attempts to identify your past self. So '
+             'it\'s important that you concentrate on answering '
+             'only in your past self, and not mix up your past, present, '
+             'ideal or social self.'),
         ],
         PORTUGUESE: [
             ("Esse teste possui " + Fore.RED + "144 " + Fore.RESET +
@@ -125,15 +125,15 @@ def print_result_explanation(language):
     """
     explanation = {
         ENGLISH: [
-            ("The results of RHEPY are calculated, first, by the "
-             "highest scored type in the test. Then, if two types "
-             "are tied, the one with the highest scored wings "
-             "takes precedence. Lastly, it checks if your overall "
-             "score matches a set of conditions that correlate to "
-             "one specific type, and if it does, that ends up "
-             "being your resulting type. So, even if your "
-             "resulting type is not the highest scored type in "
-             "the test, that's not a mistake!"),
+            ("The results of RHEPY are first calculated by the "
+             "highest scoring type in the test. Then, if two types "
+             "are tied, the one with the highest scoring wings "
+             "takes precedence. Finally, your total score is checked "
+             "to see if it matches a set of conditions that correlate with "
+             "a particular type, and if it does, that is "
+             "your resulting type. So even if your "
+             "resulting type is not the highest scoring type in "
+             "the test, it's not a mistake!"),
         ],
         PORTUGUESE: [
             ("Os resultados do RHEPY são calculados, primeiro, "
