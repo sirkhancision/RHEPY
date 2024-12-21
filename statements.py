@@ -1,8 +1,8 @@
-from ansiwrap import wrap
+from textwrap3 import wrap
 from constants import ENGLISH, PORTUGUESE
 
 question_number = 1
-
+2
 
 def statement(statement_1, statement_2, option_1, option_2, statement_1_type,
               statement_2_type):

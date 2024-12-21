@@ -1,11 +1,5 @@
 # workaround as ansiwrap still imports the deprecated 'imp' module
-try:
-    from ansiwrap import wrap
-except ModuleNotFoundError:
-    import importlib.util
-    import sys
-    sys.modules['imp'] = importlib.import_module('importlib.util')
-    from ansiwrap import wrap
+from textwrap3 import wrap
 from constants import ENGLISH, PORTUGUESE
 from colorama import Fore
 from results import result_type, result_wing

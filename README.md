@@ -5,5 +5,5 @@ This is basically the same as [RHETIC](https://github.com/sirkhancision/RHETIC),
 Just run `./main.py` to execute the program
 
 - Dependencies:
-	+ ansiwrap
+	+ textwrap3
 	+ colorama
